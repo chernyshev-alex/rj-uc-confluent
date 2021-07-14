@@ -1,0 +1,10 @@
+{
+  "namespace" : "com.rj.gd.streams.uc1.types",
+  "type" : "record",
+  "name" : "Order",
+  "fields" : [
+    {"name":"id","type":"string"},
+    {"name":"Ticker", "type":"string"},
+    {"name":"Size","type":"int"}
+  ]
+}
