@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -69,14 +68,18 @@ public class RjUseCaseOneApplication {
 		String[] tickers = { "IBM" , "AAPL", "CSCO", "AMD" };
 		return () -> {
 			Order order = new Order();
-			order.setId(UUID.randomUUID().toString() + "-v1");
+			String accountId = Integer.toString(random.nextInt(100));
+			order.setAccountId(accountId); //UUID.randomUUID().toString() + "-v1");
 			order.setSize(random.nextInt(10));
 			order.setTicker (tickers[random.nextInt(4)]);
-			order.setOpen(0);
-			order.setClose(0);
 			return order;
 		};
 	}
 
-
+	// Partition
+	// https://docs.spring.io/spring-cloud-stream-binder-kafka/docs/3.0.10.RELEASE/reference/html/spring-cloud-stream-binder-kafka.html#_partition_support_on_the_outbound
+//	@Bean
+//	public StreamPartitioner<String, Order> streamPartitioner() {
+//
+//	}
 }

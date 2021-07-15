@@ -5,16 +5,17 @@
  */
 package com.rj.gd.streams.uc1.types;
 
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.SchemaStore;
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Order extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8943857215055995305L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"com.rj.gd.streams.uc1.types\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"Ticker\",\"type\":\"string\"},{\"name\":\"Size\",\"type\":\"int\",\"default\":0},{\"name\":\"Open\",\"type\":\"float\",\"default\":0.0},{\"name\":\"Close\",\"type\":\"float\",\"default\":0.0}]}");
+  private static final long serialVersionUID = 394319155009603373L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"com.rj.gd.streams.uc1.types\",\"fields\":[{\"name\":\"accountId\",\"type\":\"string\"},{\"name\":\"Ticker\",\"type\":\"string\"},{\"name\":\"Size\",\"type\":\"int\",\"default\":0},{\"name\":\"Open\",\"type\":\"float\",\"default\":0.0},{\"name\":\"Close\",\"type\":\"float\",\"default\":0.0}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -70,7 +71,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     return DECODER.decode(b);
   }
 
-   private java.lang.CharSequence id;
+   private java.lang.CharSequence accountId;
    private java.lang.CharSequence Ticker;
    private int Size;
    private float Open;
@@ -85,14 +86,14 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
 
   /**
    * All-args constructor.
-   * @param id The new value for id
+   * @param accountId The new value for accountId
    * @param Ticker The new value for Ticker
    * @param Size The new value for Size
    * @param Open The new value for Open
    * @param Close The new value for Close
    */
-  public Order(java.lang.CharSequence id, java.lang.CharSequence Ticker, java.lang.Integer Size, java.lang.Float Open, java.lang.Float Close) {
-    this.id = id;
+  public Order(java.lang.CharSequence accountId, java.lang.CharSequence Ticker, java.lang.Integer Size, java.lang.Float Open, java.lang.Float Close) {
+    this.accountId = accountId;
     this.Ticker = Ticker;
     this.Size = Size;
     this.Open = Open;
@@ -104,7 +105,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return id;
+    case 0: return accountId;
     case 1: return Ticker;
     case 2: return Size;
     case 3: return Open;
@@ -117,7 +118,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.lang.CharSequence)value$; break;
+    case 0: accountId = (java.lang.CharSequence)value$; break;
     case 1: Ticker = (java.lang.CharSequence)value$; break;
     case 2: Size = (java.lang.Integer)value$; break;
     case 3: Open = (java.lang.Float)value$; break;
@@ -127,20 +128,20 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
-   * Gets the value of the 'id' field.
-   * @return The value of the 'id' field.
+   * Gets the value of the 'accountId' field.
+   * @return The value of the 'accountId' field.
    */
-  public java.lang.CharSequence getId() {
-    return id;
+  public java.lang.CharSequence getAccountId() {
+    return accountId;
   }
 
 
   /**
-   * Sets the value of the 'id' field.
+   * Sets the value of the 'accountId' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.CharSequence value) {
-    this.id = value;
+  public void setAccountId(java.lang.CharSequence value) {
+    this.accountId = value;
   }
 
   /**
@@ -252,7 +253,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Order>
     implements org.apache.avro.data.RecordBuilder<Order> {
 
-    private java.lang.CharSequence id;
+    private java.lang.CharSequence accountId;
     private java.lang.CharSequence Ticker;
     private int Size;
     private float Open;
@@ -269,8 +270,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
      */
     private Builder(com.rj.gd.streams.uc1.types.Order.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[0].schema(), other.accountId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.Ticker)) {
@@ -297,8 +298,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
      */
     private Builder(com.rj.gd.streams.uc1.types.Order other) {
       super(SCHEMA$);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.accountId)) {
+        this.accountId = data().deepCopy(fields()[0].schema(), other.accountId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.Ticker)) {
@@ -320,41 +321,41 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /**
-      * Gets the value of the 'id' field.
+      * Gets the value of the 'accountId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getId() {
-      return id;
+    public java.lang.CharSequence getAccountId() {
+      return accountId;
     }
 
 
     /**
-      * Sets the value of the 'id' field.
-      * @param value The value of 'id'.
+      * Sets the value of the 'accountId' field.
+      * @param value The value of 'accountId'.
       * @return This builder.
       */
-    public com.rj.gd.streams.uc1.types.Order.Builder setId(java.lang.CharSequence value) {
+    public com.rj.gd.streams.uc1.types.Order.Builder setAccountId(java.lang.CharSequence value) {
       validate(fields()[0], value);
-      this.id = value;
+      this.accountId = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'id' field has been set.
-      * @return True if the 'id' field has been set, false otherwise.
+      * Checks whether the 'accountId' field has been set.
+      * @return True if the 'accountId' field has been set, false otherwise.
       */
-    public boolean hasId() {
+    public boolean hasAccountId() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'id' field.
+      * Clears the value of the 'accountId' field.
       * @return This builder.
       */
-    public com.rj.gd.streams.uc1.types.Order.Builder clearId() {
-      id = null;
+    public com.rj.gd.streams.uc1.types.Order.Builder clearAccountId() {
+      accountId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -521,7 +522,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     public Order build() {
       try {
         Order record = new Order();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.accountId = fieldSetFlags()[0] ? this.accountId : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.Ticker = fieldSetFlags()[1] ? this.Ticker : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.Size = fieldSetFlags()[2] ? this.Size : (java.lang.Integer) defaultValue(fields()[2]);
         record.Open = fieldSetFlags()[3] ? this.Open : (java.lang.Float) defaultValue(fields()[3]);
@@ -558,7 +559,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeString(this.id);
+    out.writeString(this.accountId);
 
     out.writeString(this.Ticker);
 
@@ -575,7 +576,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+      this.accountId = in.readString(this.accountId instanceof Utf8 ? (Utf8)this.accountId : null);
 
       this.Ticker = in.readString(this.Ticker instanceof Utf8 ? (Utf8)this.Ticker : null);
 
@@ -589,7 +590,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+          this.accountId = in.readString(this.accountId instanceof Utf8 ? (Utf8)this.accountId : null);
           break;
 
         case 1:
