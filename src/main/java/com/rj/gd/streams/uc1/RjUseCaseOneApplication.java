@@ -28,7 +28,7 @@ public class RjUseCaseOneApplication {
 	public static void main(String[] args) {
 		for (String a: args) {
 			if ("--produce".equalsIgnoreCase(a)) {
-					Producers.main(args);
+					GoldenGateProducer.main(args);
 				return;
 			}
 		}
