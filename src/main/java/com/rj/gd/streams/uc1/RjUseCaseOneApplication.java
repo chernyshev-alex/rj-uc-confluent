@@ -2,10 +2,10 @@ package com.rj.gd.streams.uc1;
 
 import com.rj.gd.streams.uc1.types.Order;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
+import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.streams.kstream.KStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +17,14 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Log4j2
 @SpringBootApplication
-//@EnableSchemaRegistryClient
 public class RjUseCaseOneApplication {
 
-	private Random random = new Random();
+	Random random = new Random();
 
-	static Logger logger = LoggerFactory.getLogger(RjUseCaseOneApplication.class);
+	@Autowired
+	LookupService lookupService;
 
 	public static void main(String[] args) {
 		for (String a: args) {
@@ -35,19 +36,24 @@ public class RjUseCaseOneApplication {
 		SpringApplication.run(RjUseCaseOneApplication.class, args);
 	}
 
-//  it doesn't work
-//	@Bean
-//	public Consumer<Order> process()  {
-//		return (input) -> {
-//			logger.info("input: " + input);
-//		};
-//	}
+	// Stream
 
 	@Bean
-	public Consumer<KStream<Order, Order>> process(){
+	public Consumer<KStream<Order, Order>> process() {
 		return input -> {
-			input.peek(((key, value) ->
-					System.out.println(" value: "+value.toString())));
+			input.peek((key, value) -> {
+				String ticker = value.getTicker().toString();
+				// get data from cache or db
+				LookupService.TickerInfo info = lookupService.getData(ticker);
+				if (info == null) {
+					return;
+				};
+				// enrich order
+				Order order  = value;
+				order.setOpen(info.getOpen());
+				order.setClose(info.getClose());
+				log.info("consumer: enriched  {}/{}" , key, order);
+			});
 		};
 	}
 
@@ -60,13 +66,17 @@ public class RjUseCaseOneApplication {
 
 	@Bean
 	public Supplier<Order> supplier() {
+		String[] tickers = { "IBM" , "AAPL", "CSCO", "AMD" };
 		return () -> {
-			logger.info("called  supplier");
 			Order order = new Order();
 			order.setId(UUID.randomUUID().toString() + "-v1");
-			order.setSize(1);
-			order.setTicker ("IBM");
+			order.setSize(random.nextInt(10));
+			order.setTicker (tickers[random.nextInt(4)]);
+			order.setOpen(0);
+			order.setClose(0);
 			return order;
 		};
 	}
+
+
 }
