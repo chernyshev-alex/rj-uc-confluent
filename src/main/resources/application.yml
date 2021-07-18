@@ -1,4 +1,11 @@
 spring:
+  cache:
+    maxSize: 100000
+    expireInSec: 60
+  datasource:
+    url: jdbc:mysql://localhost:3306/rj
+    username: root
+    password:
   cloud:
     stream:
       function:
