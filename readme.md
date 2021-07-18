@@ -10,5 +10,6 @@ pom file has correct dependency for
   kafka-streams-avro-serde 6.1.1 - avro 1.10.2
 
 1. start docker-compose-6.1.1.yml
-2. java -jar target/rj-usecase-one-0.0.1-SNAPSHOT.jar
+2. make mysql-start and run scripts from resources/db
+3. java -jar target/rj-usecase-one-0.0.1-SNAPSHOT.jar
 

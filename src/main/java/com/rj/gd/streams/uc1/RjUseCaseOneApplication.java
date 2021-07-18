@@ -44,11 +44,10 @@ public class RjUseCaseOneApplication {
 				String ticker = value.getTicker().toString();
 				// get data from cache or db
 				LookupService.TickerInfo info = lookupService.getData(ticker);
-				if (info == null) {
-					return;
-				};
-				Order order  = enrichOrder(value, info);
-				log.info("consumer: enriched {}/{}" , key, order);
+				if (info != null) {
+					Order order = enrichOrder(value, info);
+					log.info("consumer: enriched {}/{}", key, order);
+				}
 			});
 		};
 	}
