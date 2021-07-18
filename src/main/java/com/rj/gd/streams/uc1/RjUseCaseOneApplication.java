@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,8 @@ import java.util.function.Supplier;
 @Log4j2
 @SpringBootApplication
 public class RjUseCaseOneApplication {
+
+	static String[] tickers = { "IBM" , "AAPL", "CSCO", "AMD" };
 
 	Random random = new Random();
 
@@ -66,16 +70,23 @@ public class RjUseCaseOneApplication {
 	}
 
 	@Bean
-	public Supplier<Order> supplier() {
-		String[] tickers = { "IBM" , "AAPL", "CSCO", "AMD" };
+	public Supplier<Message<Order>> supplier() {
 		return () -> {
-			Order order = new Order();
-			String accountId = Integer.toString(random.nextInt(100));
-			order.setAccountId(accountId); //UUID.randomUUID().toString() + "-v1");
-			order.setSize(random.nextInt(10));
-			order.setTicker (tickers[random.nextInt(4)]);
-			return order;
+			Order order =  makeOrder();
+			// custom partitioning to make cache more effective
+			return MessageBuilder.withPayload(order)
+					.setHeader("partitionKey", order.getTicker())
+					.build();
 		};
+	}
+
+	Order makeOrder() {
+		Order order = new Order();
+		String accountId = Integer.toString(random.nextInt(100));
+		order.setAccountId(accountId); //UUID.randomUUID().toString() + "-v1");
+		order.setSize(random.nextInt(10));
+		order.setTicker (tickers[random.nextInt(4)]);
+		return  order;
 	}
 
 	// Partition
