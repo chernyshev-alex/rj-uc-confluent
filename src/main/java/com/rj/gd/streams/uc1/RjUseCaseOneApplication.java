@@ -47,13 +47,16 @@ public class RjUseCaseOneApplication {
 				if (info == null) {
 					return;
 				};
-				// enrich order
-				Order order  = value;
-				order.setOpen(info.getOpen());
-				order.setClose(info.getClose());
-				log.info("consumer: enriched  {}/{}" , key, order);
+				Order order  = enrichOrder(value, info);
+				log.info("consumer: enriched {}/{}" , key, order);
 			});
 		};
+	}
+
+	public Order enrichOrder(Order order, LookupService.TickerInfo info) {
+		order.setOpen(info.getOpen());
+		order.setClose(info.getClose());
+		return order;
 	}
 
 	@Bean

@@ -2,6 +2,7 @@ package com.rj.gd.streams.uc1;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -15,12 +16,16 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class AppConfig {
 
-    // Cache configurations
+    @Value("${spring.cache.maxSize}")
+    Integer cacheMaxSize;
+    @Value("${spring.cache.expireInSec}")
+    Integer expireInSeconds ;
 
+    // Cache configurations
     @Bean
     public Caffeine caffeineConfig() {
-        return Caffeine.newBuilder().maximumSize(100000)
-                .expireAfterWrite(10, TimeUnit.SECONDS);
+        return Caffeine.newBuilder().maximumSize(cacheMaxSize)
+                .expireAfterWrite(expireInSeconds, TimeUnit.SECONDS);
     }
 
     @Bean

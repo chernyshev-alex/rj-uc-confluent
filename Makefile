@@ -60,3 +60,11 @@ start-consumer:
 		--key-deserializer org.apache.kafka.common.serialization.StringDeserializer  \
 		--value-deserializer org.apache.kafka.common.serialization.LongDeserializer \
 		--property print.key=true --property key.separator="-"
+
+.PHONY: mysql-start
+mysql-start:
+	mysql.server start &
+
+.PHONY: mysql-stop
+mysql-stop:
+	mysql.server stop
