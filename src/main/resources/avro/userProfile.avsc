@@ -1,0 +1,12 @@
+{
+  "namespace" : "com.rj.gd.streams.uc2.types.gen",
+  "type" : "record",
+  "name" : "UserProfile",
+  "fields" : [
+    {"name":"AccountId","type":"string"},
+    {"name":"UserAlias", "type":"string"},
+    {"name":"BlockedAmount", "type":"float", "default": 0.0},
+    {"name":"FreeAmount", "type":"float", "default": 0.0}
+  ]
+}
+

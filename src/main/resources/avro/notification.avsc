@@ -1,0 +1,10 @@
+{"namespace": "com.rj.gd.streams.uc2.types.gen",
+  "type": "record",
+  "name": "Notification",
+  "fields": [
+    {"name": "InvoiceNumber", "type": ["null", "string"]},
+    {"name": "CustomerCardNo",  "type":["null", "string"]},
+    {"name": "TotalAmount",  "type": ["null", "float"]},
+    {"name": "EarnedLoyaltyPoints",  "type": ["null", "float"]}
+  ]
+}

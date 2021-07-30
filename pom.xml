@@ -21,10 +21,10 @@
 	</properties>
 
 	<groupId>com.rj.gd.streams</groupId>
-	<artifactId>rj-usecase-one</artifactId>
+	<artifactId>rj-usecase-two</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rj-usecase-one</name>
-	<description>RJ Use Case 1</description>
+	<name>rj-usecase-two</name>
+	<description>RJ Use Case 2</description>
 
 	<dependencies>
 		<!-- Spring Dependencies-->
@@ -32,20 +32,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-	<!--	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream</artifactId>
@@ -66,11 +52,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.github.ben-manes.caffeine</groupId>
-			<artifactId>caffeine</artifactId>
-		</dependency>
-
 		<!-- Confluent and Kafka Dependencies-->
 		<dependency>
 			<groupId>io.confluent</groupId>
@@ -117,12 +98,6 @@
 			<artifactId>spring-cloud-stream-test-support</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<dependencyManagement>

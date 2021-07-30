@@ -1,0 +1,28 @@
+{
+  "namespace" : "com.rj.gd.streams.uc2.types.gen",
+  "type" : "record",
+  "name" : "UserPosition",
+  "fields" : [
+    {"name":"AccountId","type":"string"},
+    {"name":"UserAlias", "type":"string"},
+    {"name":"LastUpdatedTime","type": {"type": "int", "logicalType": "time-millis"}},
+    {"name":"BlockedAmount", "type":"float", "default": 0.0},
+    {"name":"FreeAmount", "type":"float", "default": 0.0},
+    {"name": "Rows",
+      "type": {
+        "type": "array",
+        "items": {
+            "name": "Item",
+            "type": "record",
+            "fields": [
+                {"name":"Exchange", "type":"string", "doc": "NYSE,NASDAQ,APEX"},
+                {"name":"Ticker", "type":"string"},
+                {"name":"TotalSize", "type":"int"},
+                {"name":"AvgPrice", "type":"float"}
+            ]
+        }
+      }
+   }
+  ]
+}
+

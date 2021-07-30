@@ -1,0 +1,16 @@
+{
+  "namespace" : "com.rj.gd.streams.uc2.types.gen",
+  "type" : "record",
+  "name" : "TradeOrder",
+  "fields" : [
+    {"name":"OrderId","type":"string"},
+    {"name":"OrderTime","type": {"type": "int", "logicalType": "time-millis"}},
+    {"name":"AccountId","type":"string"},
+    {"name":"Ticker", "type":"string"},
+    {"name":"OrderType", "type":"string", "doc":"MARKET,LIMIT"},
+    {"name":"Operation", "type":"string", "doc":"BUY,SELL"},
+    {"name":"Size", "type":"int"},
+    {"name":"Price", "type":"float"}
+    ]
+}
+

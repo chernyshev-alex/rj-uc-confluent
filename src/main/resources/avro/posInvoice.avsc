@@ -1,0 +1,45 @@
+{
+  "namespace" : "com.rj.gd.streams.uc2.types.gen",
+  "type" : "record",
+  "name" : "PosInvoice",
+  "fields" : [
+    {"name":"InvoiceNo","type":"string"},
+    {"name":"CreatedAt","type": {"type": "int", "logicalType": "date"}},
+    {"name":"StoreId","type":"string", "default" : ""},
+    {"name":"PosId", "type":"string", "default" : ""},
+    {"name":"CashierID", "type":"string", "default" : ""},
+    {"name":"CustomerType", "type":"string", "default" : ""},
+    {"name":"CustomerCardNo", "type":"string", "default" : ""},
+    {"name":"TotalAmount", "type":"float", "default" : 0.0},
+    {"name":"NumberOfItems", "type":"int", "default" : 0},
+    {"name":"PaymentMethod", "type":"string", "default" : ""},
+    {"name":"TaxableAmount", "type":"float", "default" : 0.0},
+    {"name":"DeliveryType", "type":"string", "default" : ""},
+    {"name": "DeliveryAddress",
+     "type" : {
+        "type" : "record",
+        "name" : "Address",
+        "fields" : [
+            {"name":"AddressLine", "type":"string", "default" : ""},
+            {"name":"ContactNumber", "type":"string", "default" : ""}
+        ]
+     }},
+    { "name": "InvoiceLineItems",
+      "type": {
+        "type": "array",
+        "items": {
+           "name": "Item",
+           "type": "record",
+            "fields": [
+                {"name":"ItemCode", "type":"string", "default" : ""},
+                {"name":"ItemDescription", "type":"string", "default" : ""},
+                {"name":"ItemQty", "type":"int", "default" : 0},
+                {"name":"ItemPrice", "type":"float", "default" : 0.0},
+                {"name":"TotalValue", "type":"float", "default" : 0.0}
+            ]
+        }
+      }
+   }
+  ]
+}
+
