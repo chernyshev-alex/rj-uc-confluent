@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: process;shipment;notifyPrime
+      bindings:
+        process-in-0:
+          destination: posinvoice
+        process-out-0:
+          destination: shipment
+        shipment-in-0:
+          destination: shipment
+        notifyPrime-in-0:
+          destination: notification
+        supplier-out-0:
+          destination: posinvoice
+          producer:
+            use-native-encoding: true
+      kafka:
+        bindings:
+          supplier-out-0:
+            producer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: http://localhost:8081
+              specific.avro.reader: true
