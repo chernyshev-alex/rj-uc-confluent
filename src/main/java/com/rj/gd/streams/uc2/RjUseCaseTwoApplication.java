@@ -25,34 +25,6 @@ public class RjUseCaseTwoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RjUseCaseTwoApplication.class, args);
 	}
-//
-//	@Bean
-//	public Consumer<KStream<String, PosInvoice>> process() {
-//		return input -> {
-//			input.peek((key, order) -> {
-//				log.info("consumer: enriched {}/{}", key, order);
-//			});
-//		};
-//	}
-
-//	@Bean
-//	public Consumer<KStream<String, PosInvoice>> process() {
-//		return input -> {
-//			input.filter((k, v) -> {
-//				log.info("== process 1 {}", input);
-//				return v.getDeliveryType().toString().equalsIgnoreCase(DELIVERY_TYPE_HOME_DELIVERY);
-//			}).to(SHIPMENT_TOPIC);
-
-//			input.filter((k, v) -> {
-//				log.info("== process 2 {}", input);
-//				return v.getCustomerType().toString().equalsIgnoreCase(CUSTOMER_TYPE_PRIME);
-//			}).mapValues(v -> RecordBuilder.getNotification(v))
-//					.to(NOTIFICATION_TOPIC,
-							// ??, Produced.with(AppSerdes.String(), AppSerdes.Notification())
-//							Produced.with(Serdes.String(),
-//									new SpecificAvroSerde<Notification>()));
-//		};
-//	}
 
 	@Bean
 	public Function<KStream<String, PosInvoice>, KStream<String, PosInvoice>> process() {
@@ -102,15 +74,4 @@ public class RjUseCaseTwoApplication {
 		//Map<String, Object> serdeProperties = new HashMap<>();
 		return avroInSerde;
 	}
-
-	//@Bean
-//	public Supplier<Message<PosInvoice>> supplier() {
-//		return () -> {
-//			PosInvoice invoice = newInvoice();
-//			// custom partitioning to make cache more effective
-//			return MessageBuilder.withPayload(invoice)
-//					.setHeader("partitionKey", invoice.getPosId())
-//					.build();
-//		};
-//	}
 }
